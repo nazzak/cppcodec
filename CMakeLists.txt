@@ -3,7 +3,6 @@ project(cppcodec CXX)
 set(PROJECT_VERSION 0.1)
 
 include(GNUInstallDirs)
-#include(CTest)
 
 # These flags are for binaries built by this particular CMake project (test_cppcodec, base64enc, etc.).
 # In your own project that uses cppcodec, you might want to specify a different standard or error level.
@@ -66,9 +65,10 @@ set_target_properties(cppcodec PROPERTIES LINKER_LANGUAGE CXX)
 add_subdirectory(tool)
 add_subdirectory(example)
 
-#if (BUILD_TESTING)
-#    add_subdirectory(test)
-#endif()
+if (BUILD_TESTING)
+    include(CTest)
+    add_subdirectory(test)
+endif()
 
 foreach(h ${PUBLIC_HEADERS})
     get_filename_component(FINAL_PATH ${h} PATH) # use DIRECTORY instead of PATH once requiring CMake 3.0
